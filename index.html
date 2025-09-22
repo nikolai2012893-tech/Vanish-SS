@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backdoor Injector</title>
+</head>
+<body>
+    <h1>Backdoor Injector</h1>
+    <p>Просто запустите бекдор в игре и нажмите кнопку, чтобы инжектировать скрипт в эту игру.</p>
+    <button onclick="injectScript()">Инжектить скрипт</button>
+
+    <script>
+        function injectScript() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:12345/inject", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert("Скрипт успешно инжектирован.");
+                } else {
+                    alert("Ошибка при инжектировании скрипта: " + xhr.statusText);
+                }
+            };
+            xhr.onerror = function() {
+                alert("Произошла ошибка при отправке запроса.");
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
