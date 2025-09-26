@@ -1,32 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backdoor Injector</title>
+<title>Vanish Executor</title>
+<style>
+body {
+background-color: #222;
+color: #fff;
+font-family: Arial, sans-serif;
+}
+.container {
+max-width: 600px;
+margin: 0 auto;
+padding: 20px;
+}
+.input-field {
+width: 100%;
+padding: 10px;
+border-radius: 5px;
+border: none;
+background-color: #333;
+color: #fff;
+}
+.button {
+padding: 10px 20px;
+border-radius: 5px;
+border: none;
+background-color: #444;
+color: #fff;
+cursor: pointer;
+}
+</style>
 </head>
 <body>
-    <h1>Backdoor Injector</h1>
-    <p>Просто запустите бекдор в игре и нажмите кнопку, чтобы инжектировать скрипт в эту игру.</p>
-    <button onclick="injectScript()">Инжектить скрипт</button>
-
-    <script>
-        function injectScript() {
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:12345/inject", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    alert("Скрипт успешно инжектирован.");
-                } else {
-                    alert("Ошибка при инжектировании скрипта: " + xhr.statusText);
-                }
-            };
-            xhr.onerror = function() {
-                alert("Произошла ошибка при отправке запроса.");
-            };
-            xhr.send();
-        }
-    </script>
-</body>
-</html>
+<div class=“container”>
+<h1>Vanish Executor</h1>
+<input type=“text” class=“input-field” id=“script-input” placeholder=“Enter modular script…”>
+<button class=“button” onclick=“injectScript()”>Inject</button>
+</div>
+<script>
+    function injectScript() {
+        const script = document.getElementById('script-input').value;
+// Send the script to the backend for injection
+fetch(’/inject’, {
+method: ‘POST’,
+headers: { ‘Content-Type’: ‘application/json’ },
+body: JSON.stringify({ script })
+});
+}
+</script>
