@@ -39,6 +39,31 @@ cursor: pointer;
 <script>
     function injectScript() {
         const script = document.getElementById('script-input').value;
+// Check for premium role on “Vanish Executor [🔴]” server
+fetch(‘https://discord.com/api/v9/guilds/SERVER_ID/members/USER_ID’, {
+headers: { ‘Authorization’: ‘Bot BOT_TOKEN’ }
+})
+.then(res => res.json())
+.then(data => {
+const hasPremiumRole = data.roles.includes(‘PREMIUM_ROLE_ID’);
+if (!hasPremiumRole) {
+// Block user from using injector
+document.getElementById(‘injector’).style.display = ‘none’;
+alert(‘You must have the premium role on Vanish Executor [🔴] server to use this injector.’);
+}
+});
+// Check if Roblox is open and an infected game is running
+if (!isRobloxOpen() || !isInfectedGameRunning()) {
+// Block user from using injector
+document.getElementById(‘injector’).style.display = ‘none’;
+alert(‘You must have Roblox open and be in an infected game to use this injector.’);
+}
+function isRobloxOpen() {
+// Use browser extension or desktop app to check if Roblox is open
+}
+function isInfectedGameRunning() {
+// Use browser extension or desktop app to check if an infected game is running
+}
 // Send the script to the backend for injection
 fetch(’/inject’, {
 method: ‘POST’,
@@ -47,3 +72,4 @@ body: JSON.stringify({ script })
 });
 }
 </script>
+
