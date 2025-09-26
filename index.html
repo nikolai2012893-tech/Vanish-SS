@@ -41,11 +41,11 @@ cursor: pointer;
         const script = document.getElementById('script-input').value;
 // Check for premium role on “Vanish Executor [🔴]” server
 fetch(‘https://discord.com/api/v9/guilds/SERVER_ID/members/USER_ID’, {
-headers: { ‘Authorization’: ‘Bot BOT_TOKEN’ }
+headers: { ‘Authorization’: ‘Bot MTQxMTAxNDk4ODQ2NTk2NzE5Nw.G4Fy4N.MQaxbYkYyOk9QBJPUVAcjrT6mvA4L1oPxJ5EzU’ }
 })
 .then(res => res.json())
 .then(data => {
-const hasPremiumRole = data.roles.includes(‘PREMIUM_ROLE_ID’);
+const hasPremiumRole = data.roles.includes(‘premium’);
 if (!hasPremiumRole) {
 // Block user from using injector
 document.getElementById(‘injector’).style.display = ‘none’;
@@ -72,4 +72,5 @@ body: JSON.stringify({ script })
 });
 }
 </script>
+
 
